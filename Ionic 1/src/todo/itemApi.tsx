@@ -4,9 +4,9 @@ import { BookProps } from './ItemProps'; // Importăm noua interfață
 
 const log = getLogger('bookApi'); // Actualizăm numele pentru a reflecta schimbarea
 
-const baseUrl = 'http://localhost:3000';
-const bookUrl = `${baseUrl}/book`; // Endpoint-ul pentru cărți
-const wsBaseUrl = baseUrl.replace(/^http(s)?:\/\//, '');
+const baseUrl = 'localhost:3000';
+const bookUrl = `http://${baseUrl}/book`; // Endpoint-ul pentru cărți
+// const wsBaseUrl = baseUrl.replace(/^http(s)?:\/\//, '');
 
 interface ResponseProps<T> {
   data: T;
@@ -51,7 +51,7 @@ interface MessageData {
 }
 
 export const newWebSocket = (onMessage: (data: MessageData) => void) => {
-  const ws = new WebSocket(`ws://${wsBaseUrl}`);
+  const ws = new WebSocket(`ws://${baseUrl}`);
   ws.onopen = () => {
     log('web socket onopen');
   };

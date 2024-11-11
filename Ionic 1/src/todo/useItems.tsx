@@ -12,7 +12,7 @@ export interface BooksState {
 }
 
 export interface BooksProps extends BooksState {
-  addBook: () => void, // Rename to addBook
+  addBook: () => void,
 }
 
 interface ActionProps {
@@ -34,7 +34,7 @@ const reducer: (state: BooksState, action: ActionProps) => BooksState =
   (state, { type, payload }) => {
     switch(type) {
       case FETCH_BOOKS_STARTED:
-        return { ...state, fetching: true, fetchingError: undefined };
+        return { ...state, fetching: true};
       case FETCH_BOOKS_SUCCEEDED:
         return { ...state, books: payload.books, fetching: false };
       case FETCH_BOOKS_FAILED:
@@ -52,15 +52,27 @@ export const useBooks: () => BooksProps = () => {
     log('addBook - TODO'); // Placeholder for adding a book functionality
   }, []);
 
-  // Fetch books on mount and set up polling
-  useEffect(() => {
-    let canceled = false;
+  useEffect(getBooksEffect, [dispatch]);
+  log(`returns - fetching = ${fetching}, items = ${JSON.stringify(books)}`);
+  return {
+    books,
+    fetching,
+    fetchingError,
+    addBook,
+  };
 
-    const fetchBooks = async () => {
+  function getBooksEffect() {
+    let canceled = false;
+    fetchItems();
+    return () => {
+      canceled = true;
+    }
+
+    async function fetchItems() {
       try {
         log('fetchBooks started');
         dispatch({ type: FETCH_BOOKS_STARTED });
-        const books = await getBooks(); // Fetch books from your API
+        const items = await getBooks();
         log('fetchBooks succeeded');
         if (!canceled) {
           dispatch({ type: FETCH_BOOKS_SUCCEEDED, payload: { books } });
@@ -71,23 +83,44 @@ export const useBooks: () => BooksProps = () => {
           dispatch({ type: FETCH_BOOKS_FAILED, payload: { error } });
         }
       }
-    };
+    }
+  }
+  // // Fetch books on mount and set up polling
+  // useEffect(() => {
+  //   let canceled = false;
 
-    fetchBooks();
+  //   const fetchBooks = async () => {
+  //     try {
+  //       log('fetchBooks started');
+  //       dispatch({ type: FETCH_BOOKS_STARTED });
+  //       const books = await getBooks(); // Fetch books from your API
+  //       log('fetchBooks succeeded');
+  //       if (!canceled) {
+  //         dispatch({ type: FETCH_BOOKS_SUCCEEDED, payload: { books } });
+  //       }
+  //     } catch (error) {
+  //       log('fetchBooks failed');
+  //       if (!canceled) {
+  //         dispatch({ type: FETCH_BOOKS_FAILED, payload: { error } });
+  //       }
+  //     }
+  //   };
 
-    const intervalId = setInterval(fetchBooks, 5000); // Poll every 5 seconds
+  //   fetchBooks();
 
-    return () => {
-      canceled = true;
-      clearInterval(intervalId);
-    };
-  }, []);
+  //   const intervalId = setInterval(fetchBooks, 5000); // Poll every 10 seconds
 
-  log(`returns - fetching = ${fetching}, books = ${JSON.stringify(books)}`);
-  return {
-    books,
-    fetching,
-    fetchingError,
-    addBook,
-  };
+  //   return () => {
+  //     canceled = true;
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
+
+  // log(`returns - fetching = ${fetching}, books = ${JSON.stringify(books)}`);
+  // return {
+  //   books,
+  //   fetching,
+  //   fetchingError,
+  //   addBook,
+  // };
 };

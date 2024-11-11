@@ -29,24 +29,25 @@ const BookEdit: React.FC<BookEditProps> = ({ history, match }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [pages, setPages] = useState<number | undefined>(undefined);
-  const [inStock, setInStock] = useState<boolean>(true); // Starea pentru inStock
+  const [inStock, setInStock] = useState<boolean>(); // Starea pentru inStock
   const [book, setBook] = useState<BookProps | undefined>(undefined); // Asigurăm că book este inițializat ca undefined
 
   useEffect(() => {
     log('useEffect');
     const routeId = match.params.id || '';
-    const foundBook = books?.find(it => it.id === routeId);
-    setBook(foundBook);
-    if (foundBook) {
-      setTitle(foundBook.title);
-      setAuthor(foundBook.author);
-      setPages(foundBook.pages);
-      setInStock(foundBook.inStock); // Setăm starea pentru inStock
+    const book = books?.find(it => it.id === routeId);
+    setBook(book);
+    if (book) {
+      setTitle(book.title);
+      setAuthor(book.author);
+      setPages(book.pages);
+      setInStock(book.inStock); // Setăm starea pentru inStock
     }
   }, [match.params.id, books]);
 
   const handleSave = useCallback(() => {
     // Creăm un obiect BookProps pentru salvare
+    log("salvaaaam");
     const editedBook: BookProps = {
       id: book?.id, // Menținem ID-ul cărții existente
       title,
@@ -74,23 +75,23 @@ const BookEdit: React.FC<BookEditProps> = ({ history, match }) => {
       <IonContent>
         <IonInput
           placeholder="Title"
-          value={title}
+          // value={title}
           onIonChange={e => setTitle(e.detail.value || '')}
         />
         <IonInput
           placeholder="Author"
-          value={author}
+          // value={author}
           onIonChange={e => setAuthor(e.detail.value || '')}
         />
         <IonInput
           placeholder="Pages"
           type="number"
-          value={pages !== undefined ? String(pages) : ''} // Asigurăm că value este un string
+          // value={pages !== undefined ? String(pages) : ''} // Asigurăm că value este un string
           onIonChange={e => setPages(parseInt(e.detail.value!, 10) || undefined)}
         />
         <IonItem>
           <IonCheckbox
-            checked={inStock} // Setăm checkbox-ul
+            // checked={inStock} // Setăm checkbox-ul
             onIonChange={e => setInStock(e.detail.checked)} // Actualizăm starea pentru inStock
           />
           <IonLabel>In Stock</IonLabel>

@@ -10,7 +10,7 @@ interface BookPropsExt extends BookProps {
 }
 
 const Book: React.FC<BookPropsExt> = ({ id, title, author, pages, inStock, onEdit }) => {
-  log(`Rendering book: ${title}, by ${author}`); // Log pentru a verifica renderizarea
+  // log(`Rendering book: ${title}, by ${author}`); // Log pentru a verifica renderizarea
 
   return (
     <IonItem onClick={() => onEdit(id)}>

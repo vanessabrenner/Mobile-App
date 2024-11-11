@@ -21,11 +21,11 @@ const log = getLogger('BookList');
 
 const BookList: React.FC<RouteComponentProps> = ({ history }) => {
   const { books, fetching, fetchingError } = useContext(BookContext); // Folosim contextul pentru cărți
-  
+
   log('render');
 
   return (
-    <IonPage>
+    <IonPage> 
       <IonHeader>
         <IonToolbar>
           <IonTitle>My Books</IonTitle>  {/* Titlul secțiunii */}
