@@ -7,7 +7,7 @@ Aplicația este structurată în două ecrane principale, fiecare având funcți
 ## Ecranul 1: Lista de Cărți
 - **Vizualizare Cărți**: Aici poți consulta toate cărțile disponibile în bibliotecă.
 - **Paginare și Infinite Scrolling**: Pe măsură ce derulezi, aplicația încarcă mai multe cărți automat, utilizând **infinite scrolling**.
-- **Funcționalitate de Căutare și Filtrare**: Permite căutarea cărților dupa titlu și filtrarea lor disponibilitate.
+- **Funcționalitate de Căutare și Filtrare**: Permite căutarea cărților dupa titlu și filtrarea lor dupa disponibilitate.
 - **Notificări în Timp Real**: WebSocket-ul actualizează automat lista de cărți când sunt efectuate modificări.
 
 ## Ecranul 2: Adăugare/Modificare Carte
@@ -33,13 +33,4 @@ Aplicația este structurată în două ecrane principale, fiecare având funcți
 
 ### 4. **Paginare și Infinite Scrolling**
 - Cărțile sunt afișate într-o listă paginată.
-- Pe măsură ce utilizatorul derulează, aplicația încarcă automat mai multe cărți utilizând **infinite scrolling**:
-  ```html
-  <ion-list>
-    <ion-item *ngFor="let book of books">
-      {{ book.title }}
-    </ion-item>
-  </ion-list>
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+- Pe măsură ce utilizatorul derulează, aplicația încarcă automat mai multe cărți utilizând **infinite scrolling**
