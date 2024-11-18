@@ -1,63 +1,45 @@
-Change log
+# Aplicație Mobilă pentru Gestionarea Cărților
 
-01 Create project
+Această aplicație mobilă permite utilizatorilor să gestioneze eficient o listă de cărți. Aplicația oferă funcționalități avansate, inclusiv autentificare JWT, stocare locală, notificări în timp real și comportament offline.
 
-- Ionic React quickstart, https://ionicframework.com/docs/react/quickstart
-- React components (App, Home), https://reactjs.org/docs/components-and-props.html
-- Ionic React navigation, https://ionicframework.com/docs/react/navigation
-- Ionic pages, https://ionicframework.com/docs/layout/structure
+Aplicația este structurată în două ecrane principale, fiecare având funcționalități specifice.
 
-02 Define a functional modular structure
+## Ecranul 1: Lista de Cărți
+- **Vizualizare Cărți**: Aici poți consulta toate cărțile disponibile în bibliotecă.
+- **Paginare și Infinite Scrolling**: Pe măsură ce derulezi, aplicația încarcă mai multe cărți automat, utilizând **infinite scrolling**.
+- **Funcționalitate de Căutare și Filtrare**: Permite căutarea cărților dupa titlu și filtrarea lor disponibilitate.
+- **Notificări în Timp Real**: WebSocket-ul actualizează automat lista de cărți când sunt efectuate modificări.
 
-- Remove pages & components root modules
-- Add functional modules (e.g. 'todo')
-- Add pages and components into modules
-- React quick start, https://react.dev/learn
+## Ecranul 2: Adăugare/Modificare Carte
+- **Adăugare Carte**: Apasă pe butonul "+" pentru a introduce o nouă carte în listă.
+- **Modificare Carte**: Dacă alegi o carte existentă, poți actualiza informațiile acesteia.
 
-03 Define component state
+## Funcționalități Adiționale
 
-- React state hook, https://react.dev/reference/react/useState
+### 1. **Autentificare utilizator cu JWT**
+- Utilizatorii se autentifică folosind un token JWT care este salvat în **local storage**.
+- După autentificare, aplicația nu redirecționează utilizatorul către pagina de login la fiecare deschidere a aplicației.
+- Utilizatorii pot să se deconecteze și să șteargă tokenul din local storage.
 
-04 Use memoization
+### 2. **Stocarea datelor în Local Storage**
+- Cărțile obținute de la server sunt salvate în **local storage**.
+- Aplicația permite utilizatorilor să acceseze cărțile și atunci când nu sunt conectați la internet (mod offline).
+- Când aplicația se reconectează la rețea, datele care nu au fost trimise sunt sincronizate cu serverul.
 
-- React memoization,
-    - https://react.dev/reference/react/useMemo
-    - https://react.dev/reference/react/memo
-- React callbacks, https://react.dev/reference/react/useCallback
+### 3. **Comportament Online/Offline**
+- Aplicația detectează automat starea rețelei și se comportă diferit în funcție de aceasta:
+  - **Online**: Aplicația trimite datele către server folosind serviciile REST securizate.
+  - **Offline**: Aplicația salvează datele local și le trimite mai târziu când rețeaua devine disponibilă.
 
-05 Extract the state from presentational components
-
-- React custom hooks, https://react.dev/learn/reusing-logic-with-custom-hooks
-
-06 Fetch data from REST services
-
-- Axios lib, https://github.com/axios/axios
-- Ionic list, https://ionicframework.com/docs/api/list
-- React effect hook, https://react.dev/reference/react/useEffect
-
-07 Use reducers to manage complex behaviour
-
-- React reducer hook, https://react.dev/reference/react/useReducer
-
-08 Lift state up using context providers
-
-- Sharing state between components, https://react.dev/learn/sharing-state-between-components
-- Passing data deeply with context, https://react.dev/learn/passing-data-deeply-with-context
-- React use context hook, https://react.dev/reference/react/useContext
-
-09 Receive server-side notifications via web sockets
-
-- Writing web socket client apps, https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
-
-10 Authentication - protected routes & auth context
-
-- High order components, https://reactjs.org/docs/higher-order-components.html
-- Protected routes, https://ui.dev/react-router-v4-protected-routes-authentication/
-
-11 Authentication - REST service & jwt
-
-- JSON Web Tokens, https://jwt.io/
-
-12 Authentication - WebSockets & jwt
-
-- Example of WS authentication, https://gist.github.com/jfromaniello/8418116
+### 4. **Paginare și Infinite Scrolling**
+- Cărțile sunt afișate într-o listă paginată.
+- Pe măsură ce utilizatorul derulează, aplicația încarcă automat mai multe cărți utilizând **infinite scrolling**:
+  ```html
+  <ion-list>
+    <ion-item *ngFor="let book of books">
+      {{ book.title }}
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
