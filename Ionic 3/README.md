@@ -1,36 +1,43 @@
-# Aplicație Mobilă pentru Gestionarea Cărților
+# 📚 Aplicație Mobilă pentru Gestionarea Cărților
 
-Această aplicație mobilă permite utilizatorilor să gestioneze eficient o listă de cărți. Aplicația oferă funcționalități avansate, inclusiv autentificare JWT, stocare locală, notificări în timp real și comportament offline.
+Această aplicație mobilă permite utilizatorilor să gestioneze eficient o listă de cărți. Aplicația oferă funcționalități avansate, inclusiv autentificare JWT, stocare locală, notificări în timp real, integrarea locației, acces la cameră, gestionarea fișierelor și suport offline.
 
-Aplicația este structurată în două ecrane principale, fiecare având funcționalități specifice.
+## 🚀 Funcționalități Principale
 
-## Ecranul 1: Lista de Cărți
-- **Vizualizare Cărți**: Aici poți consulta toate cărțile disponibile în bibliotecă.
-- **Paginare și Infinite Scrolling**: Pe măsură ce derulezi, aplicația încarcă mai multe cărți automat, utilizând **infinite scrolling**.
-- **Funcționalitate de Căutare și Filtrare**: Permite căutarea cărților dupa titlu și filtrarea lor dupa disponibilitate.
-- **Notificări în Timp Real**: WebSocket-ul actualizează automat lista de cărți când sunt efectuate modificări.
+### 📌 Ecranul 1: Lista de Cărți
+- **Vizualizare Cărți** – Afișează toate cărțile disponibile în bibliotecă.
+- **Paginare și Infinite Scrolling** – Pe măsură ce derulezi, aplicația încarcă mai multe cărți automat.
+- **Căutare și Filtrare** – Permite căutarea după titlu și filtrarea după disponibilitate.
+- **Notificări în Timp Real** – Lista de cărți se actualizează automat prin WebSocket.
 
-## Ecranul 2: Adăugare/Modificare Carte
-- **Adăugare Carte**: Apasă pe butonul "+" pentru a introduce o nouă carte în listă.
-- **Modificare Carte**: Dacă alegi o carte existentă, poți actualiza informațiile acesteia.
+### ✍️ Ecranul 2: Adăugare/Modificare Carte
+- **Adăugare Carte** – Apasă pe butonul "+" pentru a introduce o nouă carte în listă.
+- **Modificare Carte** – Selectează o carte existentă pentru a-i actualiza informațiile.
 
-## Funcționalități Adiționale
+## 🛠️ Funcționalități Adiționale
 
-### 1. **Autentificare utilizator cu JWT**
-- Utilizatorii se autentifică folosind un token JWT care este salvat în **local storage**.
-- După autentificare, aplicația nu redirecționează utilizatorul către pagina de login la fiecare deschidere a aplicației.
-- Utilizatorii pot să se deconecteze și să șteargă tokenul din local storage.
+### 🔑 1. Autentificare utilizator cu JWT
+- Utilizatorii se autentifică folosind un token JWT salvat în **local storage**.
+- După autentificare, aplicația nu cere login la fiecare deschidere.
+- Opțiune de deconectare pentru ștergerea tokenului.
 
-### 2. **Stocarea datelor în Local Storage**
-- Cărțile obținute de la server sunt salvate în **local storage**.
-- Aplicația permite utilizatorilor să acceseze cărțile și atunci când nu sunt conectați la internet (mod offline).
-- Când aplicația se reconectează la rețea, datele care nu au fost trimise sunt sincronizate cu serverul.
+### 💾 2. Stocare Locală a Datelor
+- Cărțile sunt salvate în **local storage** pentru acces offline.
+- La reconectare, datele sunt sincronizate automat cu serverul.
 
-### 3. **Comportament Online/Offline**
-- Aplicația detectează automat starea rețelei și se comportă diferit în funcție de aceasta:
-  - **Online**: Aplicația trimite datele către server folosind serviciile REST securizate.
-  - **Offline**: Aplicația salvează datele local și le trimite mai târziu când rețeaua devine disponibilă.
+### 🌐 3. Comportament Online/Offline
+- **Online** – Aplicația comunică cu serverul prin REST API securizat.
+- **Offline** – Datele sunt salvate local și trimise când rețeaua devine disponibilă.
 
-### 4. **Paginare și Infinite Scrolling**
+### 📖 4. Paginare și Infinite Scrolling
 - Cărțile sunt afișate într-o listă paginată.
-- Pe măsură ce utilizatorul derulează, aplicația încarcă automat mai multe cărți utilizând **infinite scrolling**
+- Pe măsură ce utilizatorul derulează, se încarcă automat mai multe cărți.
+
+### 🆕 5. Funcționalități Suplimentare
+- 📍 **Localizare GPS** – Fiecare carte are asociată o locație prin **Google Maps**.
+- 📸 **Integrarea Camerei** – Utilizatorii pot adăuga imagini pentru cărți folosind camera dispozitivului.
+- 📂 **Gestionarea Fișierelor** – Suport pentru stocarea și accesarea fișierelor locale.
+- 🎨 **Animații** – Experiență vizuală îmbunătățită prin mici animații.
+
+---
+
