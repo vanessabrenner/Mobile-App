@@ -13,6 +13,8 @@ export const usePreferences = () => {
     // Functia care salvează un obiect de tip ItemProps
     const saveItem = async (item: ItemProps) => {
       const key = item._id || `temp-id-${new Date().getTime()}`;  // Folosim _id dacă există, altfel generăm un ID temporar
+      item._id = key;
+      log(key);
       await Preferences.set({
         key,  // Folosim key-ul generat
         value: JSON.stringify(item),  // Salvăm obiectul sub formă de string JSON

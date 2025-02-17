@@ -1,3 +1,13 @@
+export interface MyPhoto {
+  filepath: string;
+  webviewPath?: string;
+}
+
+export interface Location {
+  lat: number;
+  lng: number;
+}
+
 export interface ItemProps {
   _id?: string;
   title: string;
@@ -5,4 +15,6 @@ export interface ItemProps {
   pages: number; 
   releaseDate: Date,
   inStock: boolean;
+  photos?: MyPhoto[];
+  location?: Location;
 }

@@ -16,11 +16,10 @@ import {
   IonToolbar,
   IonSearchbar,
   IonCheckbox,
-  IonText,
 } from '@ionic/react';
 import { add, checkmarkCircle, closeCircle, logOut } from 'ionicons/icons';
 import { getLogger } from '../core';
-import { ItemContext } from './ItemProvider';
+import { ItemContext } from './ItemProvider'; 
 import { useNetwork } from '../network/useNetwork';
 import { AuthContext } from '../auth/AuthProvider';
 

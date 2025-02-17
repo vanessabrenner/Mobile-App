@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef  } from 'react';
 import { RouteComponentProps } from 'react-router';
 import {
   IonItem,
@@ -16,8 +16,8 @@ import {
   IonToolbar,
   IonSearchbar,
   IonCheckbox,
-  IonText,
 } from '@ionic/react';
+import { createAnimation } from '@ionic/react';
 import { add, checkmarkCircle, closeCircle, logOut } from 'ionicons/icons';
 import { getLogger } from '../core';
 import { ItemContext } from './ItemProvider';
@@ -37,6 +37,21 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
   const [searchText, setSearchText] = useState('');
   const [inStockFilter, setInStockFilter] = useState<boolean | undefined>(undefined); // Filtrul pentru inStock
   const [visibleItemsCount, setVisibleItemsCount] = useState(INITIAL_ITEMS_COUNT);
+
+  const titleRef = useRef<HTMLIonTitleElement>(null);
+  useEffect(() => {
+    if (titleRef.current) {
+      const animation = createAnimation()
+        .addElement(titleRef.current)
+        .duration(1000)
+        .fromTo('opacity', '1', '0.5') // Alternează opacitatea
+        .fromTo('transform', 'scale(1)', 'scale(0.99)') // Crește și micșorează dimensiunea
+        .iterations(Infinity) // Repetă animația la nesfârșit
+        .direction('alternate'); // Animația se inversează la fiecare ciclu
+  
+      animation.play();
+    }
+  }, []);
 
   // Filtrarea itemelor în funcție de textul căutat și statusul inStock
   const filteredItems = items?.filter(
@@ -78,7 +93,7 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
                 marginLeft: '5px',
               }}
             />
-            <IonTitle>📚 My Book Collection</IonTitle>
+            <IonTitle ref={titleRef}>📚 My Book Collection</IonTitle>
           </div>
           <IonButton slot="end" color="light" onClick={() => logout && logout()}>
             <IonIcon icon={logOut} slot="start" />
@@ -114,7 +129,7 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
         )}
 
         {visibleItems && visibleItems.length > 0 ? (
-          <IonList>
+           <IonList>
             {visibleItems.map(({ _id, title, author, pages, releaseDate, inStock }) => {
               const displayId = _id || `temp-id-${new Date().getTime()}`;
               return (

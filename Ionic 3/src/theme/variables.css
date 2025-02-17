@@ -1,2 +1,9 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+/* global.css (sau fișierul tău global CSS) */
+.custom-modal .modal-wrapper {
+    height: 80vh !important;
+    width: 90% !important;
+    margin: auto;
+  }
+  

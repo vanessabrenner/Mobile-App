@@ -78,8 +78,8 @@ const reducer: (state: ItemsState, action: ActionProps) => ItemsState =
         const item = payload.item;
 
         const index = items.findIndex(it => it._id === item._id);
-        if (index === -1) {
-          items.push(item);
+        if (index === -1) {          
+          items.push(item); 
         } else {
           items[index] = item;
         }
