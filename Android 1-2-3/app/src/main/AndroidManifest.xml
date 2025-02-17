@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:targetApi="31">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBWyYGotZKs7luswp4m1M5QJhDc99hVwGE"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="randomkey"/>
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
